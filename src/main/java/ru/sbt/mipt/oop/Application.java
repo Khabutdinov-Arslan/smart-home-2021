@@ -11,6 +11,7 @@ public class Application {
         ArrayList<EventHandler> handlers = new ArrayList<>();
         handlers.add(new LightEventHandler(smartHome));
         handlers.add(new DoorEventHandler(smartHome));
+        handlers.add(new HallDoorEventHandler(smartHome));
         EventLoop eventLoop = new EventLoop(smartHome, handlers);
         eventLoop.process();
     }

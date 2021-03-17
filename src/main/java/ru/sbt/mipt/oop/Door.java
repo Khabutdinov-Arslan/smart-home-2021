@@ -17,6 +17,10 @@ public class Door implements HomeComponent, Actionable {
         isOpen = open;
     }
 
+    public boolean getOpen() {
+        return isOpen;
+    }
+
     @Override
     public void execute(Action action) {
         action.act(this);
