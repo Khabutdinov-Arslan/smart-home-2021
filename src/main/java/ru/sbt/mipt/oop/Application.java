@@ -11,7 +11,7 @@ public class Application {
         List<EventHandler> handlers = new ArrayList<>();
         handlers.add(new LightEventHandler(smartHome));
         handlers.add(new DoorEventHandler(smartHome));
-        EventLoop eventLoop = new EventLoop(smartHome, handlers);
+        EventLoop eventLoop = new EventLoop(smartHome, handlers, new RandomSensorEventGenerator());
         eventLoop.process();
     }
 
