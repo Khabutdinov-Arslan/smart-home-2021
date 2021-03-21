@@ -1,17 +1,16 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.events;
+
+import ru.sbt.mipt.oop.components.SmartHome;
 
 import java.util.ArrayList;
 
-import static ru.sbt.mipt.oop.SensorEventType.*;
-import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
-
 public class EventLoop {
-    EventLoop(SmartHome smartHome, ArrayList<EventHandler> handlers){
+    public EventLoop(SmartHome smartHome, ArrayList<EventHandler> handlers){
         this.smartHome = smartHome;
         this.handlers = handlers;
     }
 
-    void process(){
+    public void process(){
         // создаём обработчик
 
         // начинаем цикл обработки событий
@@ -20,8 +19,7 @@ public class EventLoop {
         while (event != null) {
             System.out.println("Got event: " + event);
             for (EventHandler handler:handlers){
-                Action action = handler.handleEvent(event);
-                smartHome.execute(action);
+                handler.handleEvent(event);
             }
             event = generator.getNextSensorEvent();
         }

@@ -1,6 +1,9 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.components;
 
-public class Light implements HomeComponent, Actionable {
+import ru.sbt.mipt.oop.events.Action;
+import ru.sbt.mipt.oop.components.Actionable;
+
+public class Light implements Actionable {
     private boolean isOn;
     private final String id;
 

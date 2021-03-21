@@ -1,19 +1,20 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.events;
 
-import java.util.function.Function;
+import ru.sbt.mipt.oop.components.Light;
+import ru.sbt.mipt.oop.components.SmartHome;
 
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
-import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
+import static ru.sbt.mipt.oop.events.SensorEventType.LIGHT_ON;
+import static ru.sbt.mipt.oop.events.SensorEventType.LIGHT_OFF;
 
-public class LightEventHandler implements EventHandler{
+public class LightEventHandler implements EventHandler {
 
-    LightEventHandler(SmartHome smartHome){
+    public LightEventHandler(SmartHome smartHome){
         this.smartHome = smartHome;
     }
 
     @Override
-    public Action handleEvent(SensorEvent event) {
-            return ((component) -> {
+    public void handleEvent(SensorEvent event) {
+            smartHome.execute((component) -> {
                 if (component instanceof Light) {
                     Light light = (Light) component;
                     if (light.getId().equals(event.getObjectId())) {

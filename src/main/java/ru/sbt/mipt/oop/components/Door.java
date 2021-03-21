@@ -1,6 +1,8 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.components;
 
-public class Door implements HomeComponent, Actionable {
+import ru.sbt.mipt.oop.events.Action;
+
+public class Door implements Actionable {
     private final String id;
     private boolean isOpen;
 
