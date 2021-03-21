@@ -1,12 +1,13 @@
 package ru.sbt.mipt.oop;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static ru.sbt.mipt.oop.SensorEventType.*;
 import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
 public class EventLoop {
-    EventLoop(SmartHome smartHome, ArrayList<EventHandler> handlers){
+    EventLoop(SmartHome smartHome, List<EventHandler> handlers){
         this.smartHome = smartHome;
         this.handlers = handlers;
     }
@@ -26,5 +27,5 @@ public class EventLoop {
     }
 
     SmartHome smartHome;
-    ArrayList<EventHandler> handlers;
+    List<EventHandler> handlers;
 }
