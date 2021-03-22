@@ -1,9 +1,6 @@
 package ru.sbt.mipt.oop.components;
 
-import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.events.Action;
-import ru.sbt.mipt.oop.components.Actionable;
-import ru.sbt.mipt.oop.components.Door;
 
 import java.util.Collection;
 
