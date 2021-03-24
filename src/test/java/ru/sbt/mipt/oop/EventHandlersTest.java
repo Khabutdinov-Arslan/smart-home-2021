@@ -8,6 +8,7 @@ import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.Room;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.events.*;
+import ru.sbt.mipt.oop.events.types.*;
 import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
 
 import java.util.*;
@@ -32,31 +33,31 @@ public class EventHandlersTest {
 
     @Test
     public void openDoorTest(){
-        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.DOOR_OPEN, "3"));
+        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventDoorOpen(), "3"));
 
         Assert.assertTrue(Objects.requireNonNull(SmartHomeHelpers.getDoorById(smartHome, "3")).getOpen());
     }
 
     @Test
     public void closeDoorTest(){
-        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.DOOR_CLOSED, "1"));
+        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventDoorClose(), "1"));
 
         Assert.assertFalse(Objects.requireNonNull(SmartHomeHelpers.getDoorById(smartHome, "1")).getOpen());
     }
 
     @Test
     public void openHallDoorTest(){
-        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.DOOR_OPEN, "4"));
-        new HallDoorEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.DOOR_OPEN, "4"));
+        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventDoorOpen(), "4"));
+        new HallDoorEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventDoorOpen(), "4"));
 
         Assert.assertTrue(Objects.requireNonNull(SmartHomeHelpers.getDoorById(smartHome, "4")).getOpen());
     }
 
     @Test
     public void closeHallDoorTest(){
-        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.DOOR_OPEN, "4"));
-        new LightEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.LIGHT_ON, "6"));
-        new HallDoorEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.DOOR_CLOSED, "4"));
+        new DoorEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventDoorOpen(), "4"));
+        new LightEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventLightOn(), "6"));
+        new HallDoorEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventDoorClose(), "4"));
 
         Assert.assertFalse(Objects.requireNonNull(SmartHomeHelpers.getDoorById(smartHome, "4")).getOpen());
         Assert.assertFalse(Objects.requireNonNull(SmartHomeHelpers.getLightById(smartHome, "6")).isOn());
@@ -66,15 +67,45 @@ public class EventHandlersTest {
 
     @Test
     public void turnLightOnTest(){
-        new LightEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.LIGHT_ON, "5"));
+        new LightEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventLightOn(), "5"));
 
         Assert.assertTrue(Objects.requireNonNull(SmartHomeHelpers.getLightById(smartHome, "5")).isOn());
     }
 
     @Test
     public void turnLightOffTest(){
-        new LightEventHandler(smartHome).handleEvent(new SensorEvent(SensorEventType.LIGHT_OFF, "6"));
+        new LightEventHandler(smartHome).handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
 
         Assert.assertFalse(Objects.requireNonNull(SmartHomeHelpers.getLightById(smartHome, "6")).isOn());
+    }
+
+    @Test
+    public void activateAlarmTest(){
+        EventHandler handler = new LightEventHandler(smartHome);
+        HandlerManager manager = new SimpleHandlerManager(new ArrayList<>(Collections.singletonList(handler)));
+        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(new Alarm(), manager);
+        alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
+        assert(alarmedManager.getState().equals(AlarmState.ACTIVATED));
+    }
+
+    @Test
+    public void triggerAlarmTest(){
+        EventHandler handler = new LightEventHandler(smartHome);
+        HandlerManager manager = new SimpleHandlerManager(new ArrayList<>(Collections.singletonList(handler)));
+        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(new Alarm(), manager);
+        alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
+        alarmedManager.handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
+        assert(alarmedManager.getState().equals(AlarmState.ALARM));
+    }
+
+    @Test
+    public void deactivateAlarmTest(){
+        EventHandler handler = new LightEventHandler(smartHome);
+        HandlerManager manager = new SimpleHandlerManager(new ArrayList<>(Collections.singletonList(handler)));
+        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(new Alarm(), manager);
+        alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
+        alarmedManager.handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
+        alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmDeactivate(1234), "6"));
+        assert(alarmedManager.getState().equals(AlarmState.DEACTIVATED));
     }
 }

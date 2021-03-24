@@ -3,8 +3,8 @@ package ru.sbt.mipt.oop.events;
 import ru.sbt.mipt.oop.commands.PrintCommandSender;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.components.Door;
-
-import static ru.sbt.mipt.oop.events.SensorEventType.*;
+import ru.sbt.mipt.oop.events.types.SensorEventDoorClose;
+import ru.sbt.mipt.oop.events.types.SensorEventDoorOpen;
 
 public class DoorEventHandler implements EventHandler {
 
@@ -21,11 +21,11 @@ public class DoorEventHandler implements EventHandler {
                 if (!door.getId().equals(event.getObjectId())) {
                     return;
                 }
-                if (event.getType() == DOOR_OPEN) {
+                if (event.getType() instanceof SensorEventDoorOpen) {
                     door.setOpen(true);
                     System.out.println("Door " + door.getId() + " was opened.");
                 }
-                if (event.getType() == DOOR_CLOSED){
+                if (event.getType() instanceof SensorEventDoorClose){
                     door.setOpen(false);
                     System.out.println("Door " + door.getId() + " was closed.");
                 }
