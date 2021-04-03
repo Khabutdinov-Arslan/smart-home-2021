@@ -1,7 +1,6 @@
-package ru.sbt.mipt.oop.events;
+package ru.sbt.mipt.oop.events.generator;
 
 import ru.sbt.mipt.oop.events.SensorEvent;
-import ru.sbt.mipt.oop.events.SensorEventGenerator;
 
 import ru.sbt.mipt.oop.events.types.SensorEventDoorOpen;
 import ru.sbt.mipt.oop.events.types.SensorEventType;

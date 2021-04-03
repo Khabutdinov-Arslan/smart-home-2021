@@ -8,6 +8,11 @@ import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.Room;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.events.*;
+import ru.sbt.mipt.oop.events.actionable.DoorEventHandler;
+import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
+import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
+import ru.sbt.mipt.oop.events.alarm.Alarm;
+import ru.sbt.mipt.oop.events.alarm.AlarmedHandlerManager;
 import ru.sbt.mipt.oop.events.types.*;
 import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
 
@@ -80,32 +85,25 @@ public class EventHandlersTest {
     }
 
     @Test
-    public void activateAlarmTest(){
-        EventHandler handler = new LightEventHandler(smartHome);
-        HandlerManager manager = new SimpleHandlerManager(new ArrayList<>(Collections.singletonList(handler)));
-        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(new Alarm(), manager);
-        alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
-        assert(alarmedManager.getState().equals(AlarmState.ACTIVATED));
-    }
-
-    @Test
     public void triggerAlarmTest(){
         EventHandler handler = new LightEventHandler(smartHome);
         HandlerManager manager = new SimpleHandlerManager(new ArrayList<>(Collections.singletonList(handler)));
-        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(new Alarm(), manager);
+        Alarm alarm = new Alarm();
+        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(alarm, manager);
         alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
         alarmedManager.handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
-        assert(alarmedManager.getState().equals(AlarmState.ALARM));
+        assert(alarm.isFiring());
     }
 
     @Test
     public void deactivateAlarmTest(){
         EventHandler handler = new LightEventHandler(smartHome);
         HandlerManager manager = new SimpleHandlerManager(new ArrayList<>(Collections.singletonList(handler)));
-        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(new Alarm(), manager);
+        Alarm alarm = new Alarm();
+        AlarmedHandlerManager alarmedManager = new AlarmedHandlerManager(alarm, manager);
         alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
         alarmedManager.handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
         alarmedManager.handleEvent(new SensorEvent(new SensorEventAlarmDeactivate(1234), "6"));
-        assert(alarmedManager.getState().equals(AlarmState.DEACTIVATED));
+        assert(!alarm.isFiring());
     }
 }

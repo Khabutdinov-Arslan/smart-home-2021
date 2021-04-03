@@ -1,8 +1,7 @@
 package ru.sbt.mipt.oop.events;
 
 import ru.sbt.mipt.oop.components.SmartHome;
-
-import java.util.ArrayList;
+import ru.sbt.mipt.oop.events.generator.RandomSensorEventGenerator;
 
 public class EventLoop {
     public EventLoop(SmartHome smartHome, HandlerManager handlerManager){

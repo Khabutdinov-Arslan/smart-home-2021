@@ -2,6 +2,9 @@ package ru.sbt.mipt.oop;
 
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.events.*;
+import ru.sbt.mipt.oop.events.actionable.DoorEventHandler;
+import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
+import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
 import ru.sbt.mipt.oop.parsers.JSONSmartHomeReader;
 
 import java.util.ArrayList;

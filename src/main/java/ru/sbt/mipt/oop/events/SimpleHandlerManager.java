@@ -1,6 +1,7 @@
 package ru.sbt.mipt.oop.events;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleHandlerManager implements HandlerManager{
     public SimpleHandlerManager(ArrayList<EventHandler> handlers){
@@ -14,5 +15,5 @@ public class SimpleHandlerManager implements HandlerManager{
         }
     }
 
-    private ArrayList<EventHandler> handlers;
+    private final List<EventHandler> handlers;
 }

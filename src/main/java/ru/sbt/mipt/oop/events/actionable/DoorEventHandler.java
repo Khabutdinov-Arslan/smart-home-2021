@@ -1,15 +1,16 @@
-package ru.sbt.mipt.oop.events;
+package ru.sbt.mipt.oop.events.actionable;
 
-import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.commands.PrintCommandSender;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.components.Door;
+import ru.sbt.mipt.oop.events.EventHandler;
+import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.types.SensorEventDoorClose;
-import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
+import ru.sbt.mipt.oop.events.types.SensorEventDoorOpen;
 
-public class HallDoorEventHandler implements EventHandler {
+public class DoorEventHandler implements EventHandler {
 
-    public HallDoorEventHandler(SmartHome smartHome){
+    public DoorEventHandler(SmartHome smartHome){
         this.smartHome = smartHome;
         this.commandPrinter = new PrintCommandSender();
     }
@@ -19,25 +20,20 @@ public class HallDoorEventHandler implements EventHandler {
         smartHome.execute((component -> {
             if (component instanceof Door){
                 Door door = (Door)component;
-                if (!SmartHomeHelpers.isHallDoor(smartHome, door.getId())){
-                    return;
-                }
                 if (!door.getId().equals(event.getObjectId())) {
                     return;
                 }
+                if (event.getType() instanceof SensorEventDoorOpen) {
+                    door.setOpen(true);
+                    System.out.println("Door " + door.getId() + " was opened.");
+                }
                 if (event.getType() instanceof SensorEventDoorClose){
                     door.setOpen(false);
-                    System.out.println("Door (hall) " + door.getId() + " was closed.");
-                    smartHome.execute((innerComponent)->{
-                        if (innerComponent instanceof Light){
-                            Light light = (Light)innerComponent;
-                            System.out.println("Light " + light.getId() + " was turned off.");
-                            light.setOn(false);
-                        }
-                    });
+                    System.out.println("Door " + door.getId() + " was closed.");
                 }
             }
         }));
+
     }
 
     SmartHome smartHome;

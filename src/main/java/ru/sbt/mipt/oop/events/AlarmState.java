@@ -1,7 +1,5 @@
 package ru.sbt.mipt.oop.events;
 
-public enum AlarmState {
-    DEACTIVATED,
-    ACTIVATED,
-    ALARM
+public interface AlarmState {
+    void handleEvent(SensorEvent event);
 }

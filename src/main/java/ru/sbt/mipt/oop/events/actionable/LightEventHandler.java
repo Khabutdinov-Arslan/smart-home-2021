@@ -1,7 +1,9 @@
-package ru.sbt.mipt.oop.events;
+package ru.sbt.mipt.oop.events.actionable;
 
 import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.SmartHome;
+import ru.sbt.mipt.oop.events.EventHandler;
+import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.types.SensorEventLightOff;
 import ru.sbt.mipt.oop.events.types.SensorEventLightOn;
 
