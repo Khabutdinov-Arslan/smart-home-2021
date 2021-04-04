@@ -3,16 +3,14 @@ package ru.sbt.mipt.oop;
 import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.events.CCSensorEventAdaptor;
 import com.coolcompany.smarthome.events.EventHandler;
 import ru.sbt.mipt.oop.events.actionable.DoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
-import ru.sbt.mipt.oop.events.alarm.Alarm;
-import ru.sbt.mipt.oop.events.alarm.AlarmedHandlerConfigurator;
-import ru.sbt.mipt.oop.events.types.*;
+import ru.sbt.mipt.oop.alarm.Alarm;
+import ru.sbt.mipt.oop.alarm.AlarmedEventHandler;
 import ru.sbt.mipt.oop.parsers.JSONSmartHomeReader;
 
 import java.util.Collection;

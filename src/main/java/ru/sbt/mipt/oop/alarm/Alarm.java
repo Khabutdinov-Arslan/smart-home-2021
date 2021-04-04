@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.events.alarm;
+package ru.sbt.mipt.oop.alarm;
 
 public class Alarm {
     private AlarmState state;
@@ -26,8 +26,8 @@ public class Alarm {
     public Boolean isFiring(){
         return this.state instanceof AlarmFiring;
     }
+    public Boolean isActivated(){
+        return this.state instanceof AlarmActivated;
+    }
 
-    public Boolean isActivated() {return this.state instanceof AlarmActivated;}
-
-    public Boolean isDeactivated() {return this.state instanceof AlarmDeactivated;}
 }

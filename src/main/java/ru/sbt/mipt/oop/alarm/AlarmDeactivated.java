@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.events.alarm;
+package ru.sbt.mipt.oop.alarm;
 
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.types.SensorEventAlarmActivate;

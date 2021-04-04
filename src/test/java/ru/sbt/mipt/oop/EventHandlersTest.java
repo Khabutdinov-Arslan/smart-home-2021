@@ -11,10 +11,8 @@ import ru.sbt.mipt.oop.events.*;
 import ru.sbt.mipt.oop.events.actionable.DoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
-import ru.sbt.mipt.oop.events.alarm.Alarm;
-import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
-import ru.sbt.mipt.oop.events.alarm.AlarmedHandlerConfigurator;
-import ru.sbt.mipt.oop.events.alarm.handlers.*;
+import ru.sbt.mipt.oop.alarm.Alarm;
+import ru.sbt.mipt.oop.alarm.AlarmedHandlerManager;
 import ru.sbt.mipt.oop.events.types.*;
 import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
 

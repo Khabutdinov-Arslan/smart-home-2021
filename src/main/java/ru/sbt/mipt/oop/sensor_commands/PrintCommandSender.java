@@ -1,7 +1,4 @@
-package ru.sbt.mipt.oop.commands;
-
-import ru.sbt.mipt.oop.commands.CommandSender;
-import ru.sbt.mipt.oop.commands.SensorCommand;
+package ru.sbt.mipt.oop.sensor_commands;
 
 public class PrintCommandSender implements CommandSender {
     @Override
