@@ -7,7 +7,7 @@ public class Alarm {
         this.state = new AlarmDeactivated(this);
     }
 
-    public void setState(AlarmState state){
+    void setState(AlarmState state){
         this.state=state;
     }
 

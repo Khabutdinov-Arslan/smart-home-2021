@@ -5,15 +5,15 @@ import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.alarm.handlers.*;
 
 public class AlarmedEventHandler implements EventHandler{
-    Alarm alarm;
-    EventHandler handler;
-    AlarmNotifier notifier;
-    AlarmHandler alarmHandler;
+    private final Alarm alarm;
+    private final EventHandler handler;
+    private final AlarmNotifier notifier;
+    private final AlarmHandler alarmHandler;
 
-    public AlarmedEventHandler(Alarm alarm, EventHandler handler){
+    public AlarmedEventHandler(Alarm alarm, EventHandler handler, AlarmNotifier notifier){
         this.alarm = alarm;
         this.handler = handler;
-        this.notifier = new AlarmNotifier();
+        this.notifier = notifier;
         this.alarmHandler = new AlarmActivateHandler(handler, alarm, notifier);
         alarmHandler.setNextHandler(new AlarmDeactivateHandler(handler, alarm, notifier))
                 .setNextHandler(new AlarmFireHandler(handler, alarm, notifier))
