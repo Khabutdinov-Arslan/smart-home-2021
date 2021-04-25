@@ -8,15 +8,16 @@ import ru.sbt.mipt.oop.events.types.SensorEventAlarmActivate;
 import ru.sbt.mipt.oop.events.types.SensorEventAlarmDeactivate;
 
 public class AlarmFireHandler extends AlarmHandler {
+    private final AlarmNotifier notifier;
 
     public AlarmFireHandler(EventHandler handler, Alarm alarm, AlarmNotifier notifier) {
-        super(handler, alarm, notifier);
+        super(handler, alarm);
+        this.notifier = notifier;
     }
 
     @Override
     public void handleEvent(SensorEvent event){
-        if ((!alarm.isDeactivated()) && (!(event.getType() instanceof SensorEventAlarmDeactivate))
-                && (!(event.getType() instanceof SensorEventAlarmActivate))){
+        if (!alarm.isDeactivated()){
             alarm.fire();
             notifier.sendSMS();
         }else {
