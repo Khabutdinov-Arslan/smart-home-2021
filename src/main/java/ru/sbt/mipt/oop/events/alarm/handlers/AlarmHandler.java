@@ -6,16 +6,14 @@ import ru.sbt.mipt.oop.events.alarm.Alarm;
 import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
 
 public class AlarmHandler {
+    protected final Alarm alarm;
     private AlarmHandler nextHandler;
     protected EventHandler handler;
-    protected Alarm alarm;
-    protected AlarmNotifier notifier;
 
-    public AlarmHandler(EventHandler handler, Alarm alarm, AlarmNotifier notifier){
+    public AlarmHandler(EventHandler handler, Alarm alarm){
         this.nextHandler = null;
         this.handler = handler;
         this.alarm = alarm;
-        this.notifier = notifier;
     }
 
     public AlarmHandler setNextHandler(AlarmHandler handler){

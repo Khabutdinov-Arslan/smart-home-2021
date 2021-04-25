@@ -7,9 +7,11 @@ import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
 import ru.sbt.mipt.oop.events.types.SensorEventAlarmDeactivate;
 
 public class AlarmDeactivateHandler extends AlarmHandler {
+    private final Alarm alarm;
 
-    public AlarmDeactivateHandler(EventHandler handler, Alarm alarm, AlarmNotifier notifier) {
-        super(handler, alarm, notifier);
+    public AlarmDeactivateHandler(EventHandler handler, Alarm alarm) {
+        super(handler, alarm);
+        this.alarm = alarm;
     }
 
     @Override

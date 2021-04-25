@@ -7,8 +7,9 @@ import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
 
 public class AlarmNormalHandler extends AlarmHandler {
 
-    public AlarmNormalHandler(EventHandler handler, Alarm alarm, AlarmNotifier notifier) {
-        super(handler, alarm, notifier);
+
+    public AlarmNormalHandler(EventHandler handler, Alarm alarm) {
+        super(handler, alarm);
     }
 
     @Override
