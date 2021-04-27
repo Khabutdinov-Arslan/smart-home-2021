@@ -13,6 +13,7 @@ import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
 import ru.sbt.mipt.oop.events.alarm.Alarm;
 import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
+import ru.sbt.mipt.oop.events.alarm.AlarmedHandlerConfigurator;
 import ru.sbt.mipt.oop.events.alarm.handlers.*;
 import ru.sbt.mipt.oop.events.types.*;
 import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
@@ -89,11 +90,7 @@ public class EventHandlersTest {
     public void triggerAlarmTest(){
         EventHandler handler = new LightEventHandler(smartHome);
         Alarm alarm = new Alarm();
-        AlarmHandler alarmedEventHandler = new AlarmActivateHandler(handler, alarm);
-        alarmedEventHandler
-                .setNextHandler(new AlarmDeactivateHandler(handler, alarm))
-                .setNextHandler(new AlarmFireHandler(handler, alarm, new AlarmNotifier()))
-                .setNextHandler(new AlarmNormalHandler(handler, alarm));
+        AlarmHandler alarmedEventHandler = AlarmedHandlerConfigurator.wrapHandler(handler, alarm);
 
         alarmedEventHandler.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
         alarmedEventHandler.handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
@@ -105,11 +102,7 @@ public class EventHandlersTest {
     public void deactivateAlarmTest(){
         EventHandler handler = new LightEventHandler(smartHome);
         Alarm alarm = new Alarm();
-        AlarmHandler alarmedEventHandler = new AlarmActivateHandler(handler, alarm);
-        alarmedEventHandler
-                .setNextHandler(new AlarmDeactivateHandler(handler, alarm))
-                .setNextHandler(new AlarmFireHandler(handler, alarm, new AlarmNotifier()))
-                .setNextHandler(new AlarmNormalHandler(handler, alarm));
+        AlarmHandler alarmedEventHandler = AlarmedHandlerConfigurator.wrapHandler(handler, alarm);
 
         alarmedEventHandler.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "6"));
         alarmedEventHandler.handleEvent(new SensorEvent(new SensorEventLightOff(), "6"));
