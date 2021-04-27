@@ -5,7 +5,7 @@ import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.alarm.Alarm;
 import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
 
-public class AlarmHandler {
+public class AlarmHandler implements EventHandler{
     protected final Alarm alarm;
     private AlarmHandler nextHandler;
     protected EventHandler handler;

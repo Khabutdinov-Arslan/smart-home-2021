@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SmartHome implements Actionable {
-    private Collection<Room> rooms;
+    private final Collection<Room> rooms;
     private Alarm alarm;
 
     public SmartHome() {
         rooms = new ArrayList<>();
+        alarm = new Alarm();
     }
 
     @Override
