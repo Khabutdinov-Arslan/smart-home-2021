@@ -1,10 +1,12 @@
-package ru.sbt.mipt.oop.events;
+package ru.sbt.mipt.oop.events.actionable;
 
 import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.SmartHome;
+import ru.sbt.mipt.oop.events.EventHandler;
+import ru.sbt.mipt.oop.events.SensorEvent;
+import ru.sbt.mipt.oop.events.types.SensorEventLightOff;
+import ru.sbt.mipt.oop.events.types.SensorEventLightOn;
 
-import static ru.sbt.mipt.oop.events.SensorEventType.LIGHT_ON;
-import static ru.sbt.mipt.oop.events.SensorEventType.LIGHT_OFF;
 
 public class LightEventHandler implements EventHandler {
 
@@ -18,11 +20,11 @@ public class LightEventHandler implements EventHandler {
                 if (component instanceof Light) {
                     Light light = (Light) component;
                     if (light.getId().equals(event.getObjectId())) {
-                        if (event.getType() == LIGHT_ON) {
+                        if (event.getType() instanceof SensorEventLightOn) {
                             light.setOn(true);
                             System.out.println("Light " + light.getId() + " was turned on.");
                         }
-                        if (event.getType() == LIGHT_OFF) {
+                        if (event.getType() instanceof SensorEventLightOff) {
                             light.setOn(false);
                             System.out.println("Light " + light.getId() + " was turned off.");
                         }

@@ -1,13 +1,12 @@
 package ru.sbt.mipt.oop.events;
 
 import ru.sbt.mipt.oop.components.SmartHome;
-
-import java.util.ArrayList;
+import ru.sbt.mipt.oop.events.generator.RandomSensorEventGenerator;
 
 public class EventLoop {
-    public EventLoop(SmartHome smartHome, ArrayList<EventHandler> handlers){
+    public EventLoop(SmartHome smartHome, HandlerManager handlerManager){
         this.smartHome = smartHome;
-        this.handlers = handlers;
+        this.handlerManager = handlerManager;
     }
 
     public void process(){
@@ -18,13 +17,11 @@ public class EventLoop {
         SensorEvent event = generator.getNextSensorEvent();
         while (event != null) {
             System.out.println("Got event: " + event);
-            for (EventHandler handler:handlers){
-                handler.handleEvent(event);
-            }
+            handlerManager.handleEvent(event);
             event = generator.getNextSensorEvent();
         }
     }
 
     SmartHome smartHome;
-    ArrayList<EventHandler> handlers;
+    HandlerManager handlerManager;
 }
