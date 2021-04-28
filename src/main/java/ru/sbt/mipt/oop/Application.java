@@ -9,7 +9,6 @@ import ru.sbt.mipt.oop.events.actionable.DoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
 import ru.sbt.mipt.oop.events.alarm.Alarm;
-import ru.sbt.mipt.oop.events.alarm.AlarmedEventHandler;
 import ru.sbt.mipt.oop.parsers.JSONSmartHomeReader;
 
 import java.util.ArrayList;

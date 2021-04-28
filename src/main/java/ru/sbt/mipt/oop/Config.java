@@ -11,7 +11,7 @@ import ru.sbt.mipt.oop.events.actionable.DoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.HallDoorEventHandler;
 import ru.sbt.mipt.oop.events.actionable.LightEventHandler;
 import ru.sbt.mipt.oop.events.alarm.Alarm;
-import ru.sbt.mipt.oop.events.alarm.AlarmedEventHandler;
+import ru.sbt.mipt.oop.events.alarm.AlarmedHandlerConfigurator;
 import ru.sbt.mipt.oop.parsers.JSONSmartHomeReader;
 
 import java.util.Collection;
@@ -29,17 +29,17 @@ public class Config {
 
     @Bean
     EventHandler doorEventHandler(Alarm alarm, SmartHome smartHome){
-        return new CCSensorEventAdaptor(new AlarmedEventHandler(alarm, new DoorEventHandler(smartHome)));
+        return new CCSensorEventAdaptor(AlarmedHandlerConfigurator.wrapHandler(new DoorEventHandler(smartHome), alarm));
     }
 
     @Bean
     EventHandler hallDoorEventHandler(Alarm alarm, SmartHome smartHome){
-        return new CCSensorEventAdaptor(new AlarmedEventHandler(alarm, new HallDoorEventHandler(smartHome)));
+        return new CCSensorEventAdaptor(AlarmedHandlerConfigurator.wrapHandler(new HallDoorEventHandler(smartHome), alarm));
     }
 
     @Bean
     EventHandler lightEventHandler(Alarm alarm, SmartHome smartHome){
-        return new CCSensorEventAdaptor(new AlarmedEventHandler(alarm, new LightEventHandler(smartHome)));
+        return new CCSensorEventAdaptor(AlarmedHandlerConfigurator.wrapHandler(new LightEventHandler(smartHome), alarm));
     }
 
     @Bean
