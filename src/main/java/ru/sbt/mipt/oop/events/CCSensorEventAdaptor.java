@@ -11,15 +11,13 @@ public class CCSensorEventAdaptor implements EventHandler {
     private final ru.sbt.mipt.oop.events.EventHandler handler;
     private final HashMap <String, SensorEventType> convertor;
 
-    public CCSensorEventAdaptor(ru.sbt.mipt.oop.events.EventHandler handler){
+    public CCSensorEventAdaptor(ru.sbt.mipt.oop.events.EventHandler handler, HashMap<String, SensorEventType> convertor){
         this.handler = handler;
-        convertor = new HashMap<>();
-        convertor.put("LightIsOn", new SensorEventLightOn());
-        convertor.put("LightIsOff", new SensorEventLightOff());
-        convertor.put("DoorIsOpen", new SensorEventDoorOpen());
-        convertor.put("DoorIsClosed", new SensorEventDoorClose());
-        convertor.put("DoorIsLocked", new SensorEventAlarmActivate(1234));
-        convertor.put("DoorIsUnlocked", new SensorEventAlarmDeactivate(1234));
+        this.convertor = convertor;
+    }
+
+    public void addConversion(String eventName, SensorEventType eventType){
+        convertor.put(eventName, eventType);
     }
 
     private SensorEvent convert(CCSensorEvent event){
