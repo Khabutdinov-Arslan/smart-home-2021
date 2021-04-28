@@ -1,12 +1,13 @@
-package ru.sbt.mipt.oop.events;
+package ru.sbt.mipt.oop.events.actionable;
 
 import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.commands.PrintCommandSender;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.components.Door;
+import ru.sbt.mipt.oop.events.EventHandler;
+import ru.sbt.mipt.oop.events.SensorEvent;
+import ru.sbt.mipt.oop.events.types.SensorEventDoorClose;
 import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
-
-import static ru.sbt.mipt.oop.events.SensorEventType.DOOR_CLOSED;
 
 public class HallDoorEventHandler implements EventHandler {
 
@@ -26,7 +27,7 @@ public class HallDoorEventHandler implements EventHandler {
                 if (!door.getId().equals(event.getObjectId())) {
                     return;
                 }
-                if (event.getType() == DOOR_CLOSED){
+                if (event.getType() instanceof SensorEventDoorClose){
                     door.setOpen(false);
                     System.out.println("Door (hall) " + door.getId() + " was closed.");
                     smartHome.execute((innerComponent)->{
