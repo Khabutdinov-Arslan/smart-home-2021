@@ -4,10 +4,11 @@ import ru.sbt.mipt.oop.components.Door;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.helpers.SmartHomeHelpers;
 
-public class CloseHallDoorRemoteCommand extends SmartHomeRemoteCommand{
+public class CloseHallDoorRemoteCommand implements RemoteCommand{
+    SmartHome smartHome;
 
     public CloseHallDoorRemoteCommand(SmartHome smartHome) {
-        super(smartHome);
+        this.smartHome = smartHome;
     }
 
     @Override

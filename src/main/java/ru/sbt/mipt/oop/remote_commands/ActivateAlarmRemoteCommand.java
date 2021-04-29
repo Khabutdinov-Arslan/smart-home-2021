@@ -12,6 +12,6 @@ public class ActivateAlarmRemoteCommand extends AlarmRemoteCommand {
 
     @Override
     public void execute(){
-        alarm.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "0"));
+        alarm.activate(1234);
     }
 }

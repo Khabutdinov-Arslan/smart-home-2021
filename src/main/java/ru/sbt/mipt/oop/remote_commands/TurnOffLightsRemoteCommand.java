@@ -3,10 +3,11 @@ package ru.sbt.mipt.oop.remote_commands;
 import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.SmartHome;
 
-public class TurnOffLightsRemoteCommand extends SmartHomeRemoteCommand{
+public class TurnOffLightsRemoteCommand implements RemoteCommand{
+    SmartHome smartHome;
 
     public TurnOffLightsRemoteCommand(SmartHome smartHome) {
-        super(smartHome);
+        this.smartHome = smartHome;
     }
 
     @Override

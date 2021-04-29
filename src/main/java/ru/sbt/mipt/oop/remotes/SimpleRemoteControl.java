@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class SimpleRemoteControl implements RemoteControl {
     private final HashMap<String, RemoteCommand> buttonCommands;
 
-    public SimpleRemoteControl() {
-        this.buttonCommands = new HashMap<>();
+    public SimpleRemoteControl(HashMap<String, RemoteCommand> buttonCommands) {
+        this.buttonCommands = buttonCommands;
     }
 
     @Override
@@ -17,10 +17,6 @@ public class SimpleRemoteControl implements RemoteControl {
         if (buttonCommands.containsKey(buttonCode)){
             buttonCommands.get(buttonCode).execute();
         }
-    }
-
-    public void changeButtonAction(String buttonCode, RemoteCommand command){
-        buttonCommands.put(buttonCode, command);
     }
 
 }

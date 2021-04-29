@@ -29,10 +29,4 @@ public class SimpleRemoteControlRegistry extends RemoteControlRegistry {
             remoteControls.get(rcId).onButtonPressed(buttonCode);
         }
     }
-
-    public void changeButtonAction(String buttonCode, String rcId, RemoteCommand command){
-        if (remoteControls.containsKey(rcId) && remoteControls.get(rcId) instanceof SimpleRemoteControl){
-            ((SimpleRemoteControl) remoteControls.get(rcId)).changeButtonAction(buttonCode, command);
-        }
-    }
 }

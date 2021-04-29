@@ -10,6 +10,8 @@ import ru.sbt.mipt.oop.remote_commands.RemoteCommand;
 import ru.sbt.mipt.oop.remotes.SimpleRemoteControl;
 import ru.sbt.mipt.oop.remotes.SimpleRemoteControlRegistry;
 
+import java.util.HashMap;
+
 public class RemoteControlTest {
     SimpleRemoteControlRegistry registry;
 
@@ -20,7 +22,7 @@ public class RemoteControlTest {
 
     @Test
     public void addRemoteTest(){
-        RemoteControl remote = new SimpleRemoteControl();
+        RemoteControl remote = new SimpleRemoteControl(new HashMap<>());
         registry.registerRemoteControl(remote, "main");
 
         Assert.assertNotNull(registry.getRemoteControl("main"));
@@ -29,9 +31,11 @@ public class RemoteControlTest {
     @Test
     public void setExecCommandTest(){
         Alarm alarm = new Alarm();
-        registry.registerRemoteControl(new SimpleRemoteControl(), "main");
         RemoteCommand command = new ActivateAlarmRemoteCommand(alarm);
-        registry.changeButtonAction("A", "main", command);
+        HashMap<String, RemoteCommand> buttonCommands = new HashMap<>();
+        buttonCommands.put("A", command);
+        registry.registerRemoteControl(new SimpleRemoteControl(buttonCommands), "main");
+
         registry.onButtonPressed("A", "main");
 
         Assert.assertTrue(alarm.isActivated());

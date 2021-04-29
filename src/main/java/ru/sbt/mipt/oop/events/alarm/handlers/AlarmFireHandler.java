@@ -2,7 +2,7 @@ package ru.sbt.mipt.oop.events.alarm.handlers;
 
 import ru.sbt.mipt.oop.events.EventHandler;
 import ru.sbt.mipt.oop.events.SensorEvent;
-import ru.sbt.mipt.oop.events.alarm.Alarm;
+import ru.sbt.mipt.oop.alarm.Alarm;
 import ru.sbt.mipt.oop.events.alarm.AlarmNotifier;
 import ru.sbt.mipt.oop.events.types.SensorEventAlarmActivate;
 import ru.sbt.mipt.oop.events.types.SensorEventAlarmDeactivate;

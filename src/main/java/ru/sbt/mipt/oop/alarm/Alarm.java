@@ -29,5 +29,9 @@ public class Alarm {
     public Boolean isActivated(){
         return this.state instanceof AlarmActivated;
     }
+    public Boolean isDeactivated(){
+        return this.state instanceof AlarmDeactivated;
+    }
+
 
 }

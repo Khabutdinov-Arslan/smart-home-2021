@@ -86,7 +86,7 @@ public class RemoteCommandsTest {
     @Test
     public void alarmFireTest(){
         RemoteCommand command = new FireAlarmRemoteCommand(alarm);
-        alarm.handleEvent(new SensorEvent(new SensorEventAlarmActivate(1234), "0"));
+        alarm.activate(1234);
         command.execute();
 
         Assert.assertTrue(alarm.isFiring());

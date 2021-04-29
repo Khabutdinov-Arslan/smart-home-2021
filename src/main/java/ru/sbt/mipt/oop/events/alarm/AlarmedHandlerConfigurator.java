@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.events.alarm;
 
+import ru.sbt.mipt.oop.alarm.Alarm;
 import ru.sbt.mipt.oop.events.EventHandler;
 import ru.sbt.mipt.oop.events.alarm.handlers.*;
 
