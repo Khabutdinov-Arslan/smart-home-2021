@@ -11,6 +11,12 @@ public class SmartHomeHelpers {
         return action.getResult();
     }
 
+    public static boolean isHallLight(SmartHome smartHome, String id){
+        IsHallLightAction action = new IsHallLightAction(id);
+        smartHome.execute(action);
+        return action.getResult();
+    }
+
     public static Door getDoorById(SmartHome smartHome, String id){
         FindDoorByIdAction action = new FindDoorByIdAction(id);
         smartHome.execute(action);

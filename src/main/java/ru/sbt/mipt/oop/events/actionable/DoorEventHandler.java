@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.events.actionable;
 
-import ru.sbt.mipt.oop.commands.PrintCommandSender;
+import ru.sbt.mipt.oop.sensor_commands.PrintCommandSender;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.components.Door;
 import ru.sbt.mipt.oop.events.EventHandler;

@@ -1,10 +1,14 @@
-package ru.sbt.mipt.oop.events.alarm;
+package ru.sbt.mipt.oop.alarm;
 
-public class AlarmActivated implements AlarmState {
+import ru.sbt.mipt.oop.events.SensorEvent;
+import ru.sbt.mipt.oop.events.types.SensorEventAlarmDeactivate;
+
+public class AlarmFiring implements AlarmState {
+
     private final Alarm alarm;
     private final int code;
 
-    public AlarmActivated(Alarm alarm, int code) {
+    public AlarmFiring(Alarm alarm, int code) {
         this.alarm = alarm;
         this.code = code;
     }
@@ -23,6 +27,6 @@ public class AlarmActivated implements AlarmState {
 
     @Override
     public void fireAlarm() {
-        alarm.setState(new AlarmFiring(alarm, code));
+
     }
 }
